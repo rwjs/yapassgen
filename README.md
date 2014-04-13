@@ -35,5 +35,6 @@ Options:
 Notes:
  - Filters are inclusive - specifying multiple filters will include anything from that set.
  - Filters WILL affect Word Mode (useful for filtering out uppercase words, etc).
+ - If a filter is not specified, the default is All Printable Characters.
  - Long options are generally case and plural insensitive.
  - Both equal-separated and space-separated options values are accepted.
