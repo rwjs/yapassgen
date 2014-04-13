@@ -27,6 +27,7 @@ main()
 	fi
 	[[ "${LEN}" =~ ^[0-9]+$ ]] || { echo "LEN must be an integer! (LEN=${LEN})" >&2 ; exit 1; }
 	[[ "${LEN}" -ge 1 ]] || { echo "LEN less than 1? (LEN=${LEN})" ; exit 1 ; }
+	[[ -n "${CLASS}" ]] || CLASS='[:print:]'
 
 	case "$MODE" in
 		words)
@@ -49,7 +50,6 @@ main()
 			;;
 		chars) 
 			[[ -e "${RANDSOURCE}" ]] || { echo "RANDSOURCE file not found? (RANDSOURCE=${RANDSOURCE})" >&2 ; exit 1 ; }
-			[[ -n "${CLASS}" ]] || CLASS='[:print:]' #{ echo 'No filters specified?' >&2 ; exit 1 ; }
 			randchar
 			;;
 	esac
@@ -59,7 +59,7 @@ main()
 
 #################################### Help ####################################
 
-HELP='./yapassgen [OPTIONS]..
+HELP='yapassgen.sh [OPTIONS]..
 
 Y(et) A(nother) Pass(word) Gen(erator).sh
 
@@ -95,6 +95,8 @@ Options:
 
 Notes:
  - Filters are inclusive - specifying multiple filters will include anything from that set.
+ - Filters WILL affect Word Mode (useful for filtering out uppercase words, etc).
+ - If a filter is not specified, the default is All Printable Characters.
  - Long options are generally case and plural insensitive.
  - Both equal-separated and space-separated options values are accepted.
 '
